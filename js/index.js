@@ -1,20 +1,13 @@
 // ITERATION 1
 
 function updateSubtotal(product) {
-  //console.log('Calculating subtotal, yey!');
-
   // cogemos el objeto de precio, cantidad y subtotal
   const price = product.querySelector('.price span');
   const quantity = product.querySelector('.quantity input');
   const subtotal = product.querySelector('.subtotal span');
-  // console.log(quantity);
-  // console.log('precio: ' + price.innerText);
-  // console.log('cantidad: ' + quantity.value);
 
   // calculamos el total
   let total = Number(price.innerText) * Number(quantity.value);
-
-  // console.log('total: ' + total);
 
   // inserto el total en HTML
   subtotal.innerHTML = total;
@@ -38,8 +31,8 @@ function calculateAll() {
   allProducts.forEach((e) => {
     const subtotal = e.querySelector('.subtotal span');
     total = Number(subtotal.innerText) + total;
-    spanTotal.innerHTML = total;
   });
+  spanTotal.innerHTML = total;
 }
 
 // BONUS
@@ -111,6 +104,7 @@ function createProduct(event) {
 
   // quinto del boton remove
   let tdRemove = document.createElement('td');
+  tdRemove.classList.add('action');
   let tdRemoveButton = document.createElement('button');
   tdRemoveButton.id = 'remove';
   tdRemoveButton.classList.add('btn');
@@ -128,6 +122,9 @@ function createProduct(event) {
 
   // anexamos el nuevo producto al tbody y aparecera al final
   tbody.appendChild(newProduct);
+
+  // recargar la pagina para aññadir los eventlistener que faltan
+  reload();
 }
 
 // cuando carga la pagina
@@ -144,3 +141,10 @@ window.addEventListener('load', () => {
   const createBtn = document.getElementById('create');
   createBtn.addEventListener('click', createProduct);
 });
+
+// recargar la pagina para que añada los listeners a los nuevos productos
+const reload = () => {
+  // por todos los objetos con id #remove que me añade un evento de click
+  const removeBtn = document.querySelectorAll('#remove');
+  removeBtn.forEach((e) => e.addEventListener('click', removeProduct));
+};
