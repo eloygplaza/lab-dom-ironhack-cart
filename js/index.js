@@ -1,15 +1,20 @@
 // ITERATION 1
 
 function updateSubtotal(product) {
-  console.log('Calculating subtotal, yey!');
+  //console.log('Calculating subtotal, yey!');
 
   // cogemos el objeto de precio, cantidad y subtotal
   const price = product.querySelector('.price span');
   const quantity = product.querySelector('.quantity input');
   const subtotal = product.querySelector('.subtotal span');
+  // console.log(quantity);
+  // console.log('precio: ' + price.innerText);
+  // console.log('cantidad: ' + quantity.value);
 
   // calculamos el total
-  let total = Number(price.innerText) * quantity.value;
+  let total = Number(price.innerText) * Number(quantity.value);
+
+  // console.log('total: ' + total);
 
   // inserto el total en HTML
   subtotal.innerHTML = total;
@@ -79,23 +84,30 @@ function createProduct(event) {
   // segundo el precio del producto
   const tdPrice = document.createElement('td');
   tdPrice.classList.add('price');
+  tdPrice.innerText = '$';
   const tdPriceSpan = document.createElement('span');
-  const tdPriceContent = document.createTextNode(`$${price}`);
+  const tdPriceContent = document.createTextNode(`${price}`);
   tdPriceSpan.appendChild(tdPriceContent);
   tdPrice.appendChild(tdPriceSpan);
 
   // tercero cantidad del producto
   let tdQuantity = document.createElement('td');
+  tdQuantity.classList.add('quantity');
   let tdQuantityInput = document.createElement('input');
   tdQuantityInput.type = 'number';
+  tdQuantityInput.value = 0;
   let tdQuantityContent = document.createTextNode(`$${price}`);
   tdQuantityInput.appendChild(tdQuantityContent);
   tdQuantity.appendChild(tdQuantityInput);
 
   // cuarto de subtotal
   let tdSubtotal = document.createElement('td');
-  let tdSubtotalContent = document.createTextNode(`$${price}`);
-  tdSubtotal.appendChild(tdSubtotalContent);
+  tdSubtotal.classList.add('subtotal');
+  tdSubtotal.innerText = '$';
+  const tdSubtotalSpan = document.createElement('span');
+  let tdSubtotalContent = document.createTextNode(`0`);
+  tdSubtotalSpan.appendChild(tdSubtotalContent);
+  tdSubtotal.appendChild(tdSubtotalSpan);
 
   // quinto del boton remove
   let tdRemove = document.createElement('td');
